@@ -7,18 +7,24 @@ def create_app(config):
     app.secret_key = "something_special"
     app.config["TESTING"] = config.get("TESTING")
 
-    def load_clubs():
-        with open("clubs.json") as c:
+    def load_clubs(json_file="clubs.json"):
+        with open(json_file) as c:
             list_of_clubs = json.load(c)["clubs"]
             return list_of_clubs
 
-    def load_competitions():
-        with open("competitions.json") as comps:
+    def load_competitions(json_file="competitions.json"):
+        with open(json_file) as comps:
             list_of_competitions = json.load(comps)["competitions"]
             return list_of_competitions
 
-    competitions = load_competitions()
-    clubs = load_clubs()
+    if not app.config["TESTING"]:
+        competitions = load_competitions()
+        clubs = load_clubs()
+    else:
+        competitions = load_competitions(
+            json_file="Test_directory/test_clubs_list.json"
+        )
+        clubs = load_clubs(json_file="Test_directory/test_competitions_list.json")
 
     @app.route("/")
     def index():
