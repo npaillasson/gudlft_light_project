@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, redirect, flash, url_for
 def create_app(config):
     app = Flask(__name__)
     app.secret_key = "something_special"
+    app.config["TESTING"] = config.get("TESTING")
 
     def load_clubs():
         with open("clubs.json") as c:
@@ -62,3 +63,9 @@ def create_app(config):
         return redirect(url_for("index"))
 
     return app
+
+
+app = create_app({"TESTING": False})
+
+if __name__ == "__main__":
+    app.run()
