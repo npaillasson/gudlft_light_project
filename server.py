@@ -22,9 +22,9 @@ def create_app(config):
         clubs = load_clubs()
     else:
         competitions = load_competitions(
-            json_file="Test_directory/test_clubs_list.json"
+            json_file="Test_directory/test_competitions_list.json"
         )
-        clubs = load_clubs(json_file="Test_directory/test_competitions_list.json")
+        clubs = load_clubs(json_file="Test_directory/test_clubs_list.json")
 
     @app.route("/")
     def index():
@@ -37,8 +37,6 @@ def create_app(config):
 
     @app.route("/book/<competition>/<club>")
     def book(competition, club):
-        print(competition)
-        print(club)
         found_club = [c for c in clubs if c["name"] == club][0]
         found_competition = [c for c in competitions if c["name"] == competition][0]
         if found_club and found_competition:

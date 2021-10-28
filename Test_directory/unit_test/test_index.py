@@ -16,5 +16,4 @@ def test_home_page_return_the_right_template(client):
     """
     response = client.get("/")
     response = response.data.decode()
-    print(response)
     assert response.find("<title>GUDLFT Registration</title>") != -1
