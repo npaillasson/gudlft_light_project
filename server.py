@@ -2,29 +2,22 @@ import json
 from flask import Flask, render_template, request, redirect, flash, url_for
 
 
+def load_clubs(json_file="clubs.json"):
+    with open(json_file) as c:
+        list_of_clubs = json.load(c)["clubs"]
+        return list_of_clubs
+
+
+def load_competitions(json_file="competitions.json"):
+    with open(json_file) as comps:
+        list_of_competitions = json.load(comps)["competitions"]
+        return list_of_competitions
+
+
 def create_app(config):
     app = Flask(__name__)
     app.secret_key = "something_special"
     app.config["TESTING"] = config.get("TESTING")
-
-    def load_clubs(json_file="clubs.json"):
-        with open(json_file) as c:
-            list_of_clubs = json.load(c)["clubs"]
-            return list_of_clubs
-
-    def load_competitions(json_file="competitions.json"):
-        with open(json_file) as comps:
-            list_of_competitions = json.load(comps)["competitions"]
-            return list_of_competitions
-
-    if not app.config["TESTING"]:
-        competitions = load_competitions()
-        clubs = load_clubs()
-    else:
-        competitions = load_competitions(
-            json_file="Test_directory/test_competitions_list.json"
-        )
-        clubs = load_clubs(json_file="Test_directory/test_clubs_list.json")
 
     @app.route("/")
     def index():
@@ -71,5 +64,10 @@ def create_app(config):
 
 app = create_app({"TESTING": False})
 
+competitions = load_competitions()
+clubs = load_clubs()
+
+
 if __name__ == "__main__":
+    print(app.__dict__)
     app.run()
