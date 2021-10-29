@@ -1,23 +1,14 @@
-import json
 from flask import Flask, render_template, request, redirect, flash, url_for
-
-
-def load_clubs(json_file="clubs.json"):
-    with open(json_file) as c:
-        list_of_clubs = json.load(c)["clubs"]
-        return list_of_clubs
-
-
-def load_competitions(json_file="competitions.json"):
-    with open(json_file) as comps:
-        list_of_competitions = json.load(comps)["competitions"]
-        return list_of_competitions
+from utilities.get_user import load_competitions, load_clubs
 
 
 def create_app(config):
     app = Flask(__name__)
     app.secret_key = "something_special"
     app.config["TESTING"] = config.get("TESTING")
+
+    competitions = load_competitions()
+    clubs = load_clubs()
 
     @app.route("/")
     def index():
@@ -30,6 +21,7 @@ def create_app(config):
 
     @app.route("/book/<competition>/<club>")
     def book(competition, club):
+        print(club, competition)
         found_club = [c for c in clubs if c["name"] == club][0]
         found_competition = [c for c in competitions if c["name"] == competition][0]
         if found_club and found_competition:
@@ -64,10 +56,6 @@ def create_app(config):
 
 app = create_app({"TESTING": False})
 
-competitions = load_competitions()
-clubs = load_clubs()
-
 
 if __name__ == "__main__":
-    print(app.__dict__)
     app.run()

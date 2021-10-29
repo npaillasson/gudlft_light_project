@@ -5,7 +5,7 @@ class TestClass:
         WHEN the '/showSummary' page is requested (POST) with a valid email
         THEN check that the response is valid
         """
-        response = client.post("/showSummary", data=dict(email="test@testclub.co"))
+        response = client.post("/showSummary", data=dict(email="test@testclub1.co"))
         assert response.status_code == 200
 
     def test_summary_page_return_code_400_if_email_doesnt_exists(self, client):
