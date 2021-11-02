@@ -21,7 +21,6 @@ def create_app(config):
 
     @app.route("/book/<competition>/<club>")
     def book(competition, club):
-        print(club, competition)
         found_club = [c for c in clubs if c["name"] == club][0]
         found_competition = [c for c in competitions if c["name"] == competition][0]
         if found_club and found_competition:

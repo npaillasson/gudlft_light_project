@@ -11,8 +11,8 @@ class TestClubsArray:
         response = client.get("/clubs_array/Test Club_1")
         response = response.data.decode()
         numbers_of_clubs_in_base = len(clubs)
-        numbers_li_in_array = response.count("<li>")
-        assert numbers_li_in_array == numbers_of_clubs_in_base
+        numbers_of_li_in_array = response.count("<li>")
+        assert numbers_of_li_in_array == numbers_of_clubs_in_base
 
     def test_clubs_array_display_the_correct_information(self, client, clubs):
         response = client.get("/clubs_array/Test Club_1")

@@ -1,6 +1,3 @@
-import time
-
-
 class TestClass:
     def test_summary_page_return_code_200_if_email_exists(self, client):
         """
@@ -61,4 +58,6 @@ class TestClass:
     ):
         response = client.post("/showSummary", data=dict(email="test@testclub1.co"))
         response = response.data.decode()
-        pass
+        numbers_of_clubs_in_base = 2
+        numbers_of_li_in_array = response.count("<li class='competition'>")
+        assert numbers_of_li_in_array == numbers_of_clubs_in_base
