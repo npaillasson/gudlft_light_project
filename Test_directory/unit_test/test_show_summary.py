@@ -1,3 +1,6 @@
+import time
+
+
 class TestClass:
     def test_summary_page_return_code_200_if_email_exists(self, client):
         """
@@ -52,3 +55,10 @@ class TestClass:
         response = client.post("/showSummary", data=dict(email="test@testclub1.co"))
         response = response.data.decode()
         assert response.find(f"Points available: {clubs[0]['points']}") != -1
+
+    def test_the_page_displays_the_right_number_of_competitions(
+        self, client, competitions
+    ):
+        response = client.post("/showSummary", data=dict(email="test@testclub1.co"))
+        response = response.data.decode()
+        pass

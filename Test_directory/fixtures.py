@@ -1,3 +1,4 @@
+import time
 import pytest
 
 
@@ -6,18 +7,18 @@ def competitions():
     competitions = [
         {
             "name": "Test competition Festival",
-            "date": "2028-03-27 10:00:00",
-            "numberOfPlaces": "25",
+            "date": make_competition_date(),
+            "numberOfPlaces": "0",
         },
         {
             "name": "Test annual competition",
-            "date": "2032-03-27 10:00:00",
+            "date": make_competition_date(),
             "numberOfPlaces": "25",
         },
         {
             "name": "Test outdated competition",
-            "date": "2020-03-27 10:00:00",
-            "numberOfPlaces": "25",
+            "date": make_competition_date(outdated=True),
+            "numberOfPlaces": "10",
         },
     ]
 
@@ -32,3 +33,12 @@ def clubs():
         {"name": "Test Club_3", "email": "test@testclub3.co", "points": "5"},
     ]
     return clubs
+
+
+def make_competition_date(outdated=None):
+    actual_time = time.time()
+    if outdated:
+        competition_date = time.localtime(actual_time - 86400)
+        return time.strftime("%Y-%m-%d %H:%M:%S", competition_date)
+    competition_date = time.localtime(actual_time + 86400)
+    return time.strftime("%Y-%m-%d %H:%M:%S", competition_date)
