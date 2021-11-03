@@ -8,12 +8,12 @@ def competitions():
         {
             "name": "Test competition Festival",
             "date": make_competition_date(),
-            "numberOfPlaces": "0",
+            "numberOfPlaces": "25",
         },
         {
-            "name": "Test annual competition",
+            "name": "Test sold out competition",
             "date": make_competition_date(),
-            "numberOfPlaces": "25",
+            "numberOfPlaces": "0",
         },
         {
             "name": "Test outdated competition",
