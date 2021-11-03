@@ -20,7 +20,10 @@ class TestBooKPage:
         WHEN the '/book/<competition>/<invalid_club>' page is requested (GET) with an invalid club name
         THEN check that the response is valid
         """
-        response = client.get("/book/Test competition Festival/This Club doesnt exists")
+        response = client.get(
+            "/book/Test competition Festival/This Club doesnt exists",
+            follow_redirects=True,
+        )
         response = response.data.decode()
         assert response.find("Something went wrong-please try again") != -1
 
@@ -33,21 +36,24 @@ class TestBooKPage:
         THEN check that the response is valid
         """
         response = client.get(
-            "/book/invalid competition/Test Club with enough points to take more than 12 places"
+            "/book/invalid competition/Test Club with enough points to take more than 12 places",
+            follow_redirects=True,
         )
         response = response.data.decode()
         assert response.find("Something went wrong-please try again") != -1
 
     def test_book_page_is_not_available_if_the_competition_is_outdated(self, client):
         response = client.get(
-            "/book/Test outdated competition/Test Club with enough points to take more than 12 places"
+            "/book/Test outdated competition/Test Club with enough points to take more than 12 places",
+            follow_redirects=True,
         )
         response = response.data.decode()
         assert response.find("Something went wrong-please try again") != -1
 
     def test_book_page_is_not_available_if_the_competition_is_sold_out(self, client):
         response = client.get(
-            "/book/Test sold out competition/Test Club with enough points to take more than 12 places"
+            "/book/Test sold out competition/Test Club with enough points to take more than 12 places",
+            follow_redirects=True,
         )
         response = response.data.decode()
         assert response.find("Something went wrong-please try again") != -1
