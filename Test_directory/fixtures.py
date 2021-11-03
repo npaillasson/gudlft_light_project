@@ -16,6 +16,11 @@ def competitions():
             "numberOfPlaces": "0",
         },
         {
+            "name": "Test few slots available",
+            "date": make_competition_date(),
+            "numberOfPlaces": "5",
+        },
+        {
             "name": "Test outdated competition",
             "date": make_competition_date(outdated=True),
             "numberOfPlaces": "10",

@@ -83,17 +83,11 @@ class TestClass:
         club = clubs[0]
         response = client.post("/showSummary", data=dict(email=club["email"]))
         response = response.data.decode()
-        print(response)
         for competition in competitions:
             information = response.find(
                 f"<a href=\"/book/{competition['name'].replace(' ', '%20')}/{club['name'].replace(' ', '%20')}\">"
             )
-            print(
-                f"<a href=\"/book/{competition['name'].replace(' ', '%20')}/{club['name'].replace(' ', '%20')}\">"
-            )
             if int(competition["numberOfPlaces"]) <= 0:
-                print("in if", information)
                 assert information == -1
             else:
-                print("out if", information)
                 assert information != -1
