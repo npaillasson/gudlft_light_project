@@ -80,6 +80,7 @@ class TestClass:
     def test_the_booking_buttons_appears_only_if_the_competition_is_not_sold_out(
         self, client, competitions, clubs
     ):
+        print(clubs)
         club = clubs[0]
         response = client.post("/showSummary", data=dict(email=club["email"]))
         response = response.data.decode()

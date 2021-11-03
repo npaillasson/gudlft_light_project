@@ -1,11 +1,15 @@
 from flask import Flask, render_template, request, redirect, flash, url_for
 from utilities.get_user import load_competitions, load_clubs
 
+PRICE_OF_A_REGISTRATION = 1
+
 
 def create_app(config):
     app = Flask(__name__)
     app.secret_key = "something_special"
     app.config["TESTING"] = config.get("TESTING")
+
+    price_of_registration = PRICE_OF_A_REGISTRATION
 
     competitions = load_competitions()
     clubs = load_clubs()
