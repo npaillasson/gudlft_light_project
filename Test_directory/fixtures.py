@@ -12,14 +12,14 @@ def competitions():
             "numberOfPlaces": "25",
         },
         {
-            "name": "Test sold out competition",
-            "date": make_competition_date(),
-            "numberOfPlaces": "0",
-        },
-        {
             "name": "Test few slots available",
             "date": make_competition_date(),
             "numberOfPlaces": "5",
+        },
+        {
+            "name": "Test sold out competition",
+            "date": make_competition_date(),
+            "numberOfPlaces": "0",
         },
         {
             "name": "Test outdated competition",
