@@ -117,6 +117,24 @@ def test_the_page_returns_an_error_if_the_competition_is_outdated(
     assert int(competition["numberOfPlaces"]) == number_of_places_before_booking
 
 
+def test_the_page_returns_an_error_if_the_club_try_to_book_less_than_0_places(
+    client, clubs, competitions
+):
+    club = clubs[0]
+    number_of_points_before_booking = int(club["points"])
+    competition = competitions[3]
+    number_of_places_before_booking = int(competition["numberOfPlaces"])
+    response = client.post(
+        "/purchasePlaces",
+        follow_redirects=True,
+        data=dict(club=club["name"], competition=competition["name"], places=-1),
+    )
+    response = response.data.decode()
+    assert response.find("Something went wrong-please try again") != -1
+    assert int(club["points"]) == number_of_points_before_booking
+    assert int(competition["numberOfPlaces"]) == number_of_places_before_booking
+
+
 def test_after_a_successful_reservation_the_number_of_available_places_in_the_competition_is_updated(
     client, clubs, competitions
 ):
