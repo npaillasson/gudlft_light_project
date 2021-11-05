@@ -1,0 +1,2 @@
+[run]
+omit = Test_directory/*, */__init__.py
