@@ -4,6 +4,7 @@ certifi==2021.10.8
 charset-normalizer==2.0.7
 click==7.1.2
 ConfigArgParse==1.5.3
+coverage==6.1.1
 Flask==2.0.2
 Flask-BasicAuth==0.2.0
 Flask-Cors==3.0.10
@@ -14,7 +15,7 @@ idna==3.3
 iniconfig==1.1.1
 itsdangerous==2.0.1
 Jinja2==3.0.2
-locust==2.4.1
+locust==2.5.0
 MarkupSafe==2.0.1
 msgpack==1.0.2
 packaging==21.0
@@ -23,12 +24,15 @@ psutil==5.8.0
 py==1.10.0
 pyparsing==3.0.1
 pytest==6.2.5
+pytest-cov==3.0.0
 pytest-flask==1.2.0
+pytest-mock==3.6.1
 pyzmq==22.3.0
 requests==2.26.0
 roundrobin==0.0.2
 six==1.16.0
 toml==0.10.2
+tomli==1.2.2
 typing-extensions==3.10.0.2
 urllib3==1.26.7
 Werkzeug==2.0.2

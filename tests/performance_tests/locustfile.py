@@ -1,16 +1,16 @@
 from locust import HttpUser, task
-from server import create_app
+from server import app, create_app
+import server
 
 
 class ProjectPerfTest(HttpUser):
-    def on_start(self):
-        app = create_app({"TESTING": True})
-        app.run()
-
     @task
     def display_competition_list_and_points_balance(self):
         self.client.post("/showSummary", {"email": "john@simplylift.co"})
 
     @task
-    def update_points(self):
-        pass
+    def purchase_places_and_update_club_pts_and_competition_number_of_places(self):
+        self.client.post(
+            "/purchasePlaces",
+            {"competition": "Spring Festival", "club": "Simply Lift", "places": "2"},
+        )

@@ -11,8 +11,8 @@ def create_app(config):
 
     price_of_registration = PRICE_OF_A_REGISTRATION
 
-    competitions = load_competitions()
     clubs = load_clubs()
+    competitions = load_competitions()
 
     @app.route("/")
     def index():
