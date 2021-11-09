@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Clubs Array</title>
+</head>
+<body>
+	<h2>Clubs array </h2><a href="{{url_for('logout')}}">Logout</a>
+	<ul>
+        {% for club in clubs%}
+        <li>
+            {{club['name']}}<br>
+            Number of points: {{comp['points']}}
+        </li>
+        <br>
+        {% endfor %}
+    </ul>
+</body>
+</html>
