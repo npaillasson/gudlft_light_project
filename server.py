@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, flash, url_for
 from utilities.get_user import load_competitions, load_clubs
+from utilities.search_competion_and_club import get_club, get_competition
 
 PRICE_OF_A_REGISTRATION = 1
 
@@ -37,15 +38,18 @@ def create_app(config):
 
     @app.route("/purchasePlaces", methods=["POST"])
     def purchase_places():
-        competition = [
-            c for c in competitions if c["name"] == request.form["competition"]
-        ][0]
-        club = [c for c in clubs if c["name"] == request.form["club"]][0]
+        competition = get_competition(competitions, request.form["competition"])
+        print(competition)
+        club = get_club(clubs, request.form["club"])
+        print("ahahahahah", club)
         places_required = int(request.form["places"])
-        competition["numberOfPlaces"] = (
-            int(competition["numberOfPlaces"]) - places_required
-        )
-        flash("Great-booking complete!")
+        cost_in_points = places_required * PRICE_OF_A_REGISTRATION
+        if int(competition["numberOfPlaces"]) >= places_required:
+            competition["numberOfPlaces"] = (
+                int(competition["numberOfPlaces"]) - places_required
+            )
+            club["points"] = str(int(club["points"]) - cost_in_points)
+            flash("Great-booking complete!")
         return render_template("welcome.html", club=club, competitions=competitions)
 
     @app.route("/clubsArray")
