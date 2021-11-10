@@ -5,6 +5,7 @@ from utilities.search_competion_and_club import (
     get_competition,
     get_not_outdated_competition,
 )
+from utilities.number_of_places_allowed import number_of_places_allowed
 
 PRICE_OF_A_REGISTRATION = 1
 
@@ -39,12 +40,22 @@ def create_app(config):
             competitions, competition, outdated_permitted=False
         )
         if found_club and found_competition:
+
             return render_template(
-                "booking.html", club=found_club, competition=found_competition
+                "booking.html",
+                club=found_club,
+                competition=found_competition,
+                max_places_allowed=number_of_places_allowed(
+                    found_club, PRICE_OF_A_REGISTRATION
+                ),
             )
         else:
             flash("Something went wrong-please try again")
-            return render_template("welcome.html", club=club, competitions=competitions)
+            return render_template(
+                "welcome.html",
+                club=club,
+                competitions=competitions,
+            )
 
     @app.route("/purchasePlaces", methods=["POST"])
     def purchase_places():
@@ -55,9 +66,10 @@ def create_app(config):
         if competition and club:
             places_required = int(request.form["places"])
             cost_in_points = places_required * PRICE_OF_A_REGISTRATION
-            if (
-                int(competition["numberOfPlaces"]) >= places_required
-                and 0 <= places_required <= 12
+            if int(
+                competition["numberOfPlaces"]
+            ) >= places_required and 0 <= places_required <= number_of_places_allowed(
+                club, PRICE_OF_A_REGISTRATION
             ):
                 competition["numberOfPlaces"] = (
                     int(competition["numberOfPlaces"]) - places_required
