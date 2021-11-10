@@ -24,7 +24,11 @@ def create_app(config):
 
     @app.route("/showSummary", methods=["POST"])
     def show_summary():
-        club = [club for club in clubs if club["email"] == request.form["email"]][0]
+        try:
+            club = [club for club in clubs if club["email"] == request.form["email"]][0]
+        except IndexError:
+            flash("Oops, This emails seems unknown...")
+            return render_template("index.html")
         return render_template(
             "welcome.html",
             club=club,
