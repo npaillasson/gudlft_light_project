@@ -15,8 +15,6 @@ def create_app(config):
     app.secret_key = "something_special"
     app.config["TESTING"] = config.get("TESTING")
 
-    price_of_registration = PRICE_OF_A_REGISTRATION
-
     clubs = load_clubs()
     competitions = load_competitions()
 
@@ -46,7 +44,7 @@ def create_app(config):
                 club=found_club,
                 competition=found_competition,
                 max_places_allowed=number_of_places_allowed(
-                    found_club, PRICE_OF_A_REGISTRATION
+                    found_club, found_competition, PRICE_OF_A_REGISTRATION
                 ),
             )
         else:
@@ -66,10 +64,10 @@ def create_app(config):
         if competition and club:
             places_required = int(request.form["places"])
             cost_in_points = places_required * PRICE_OF_A_REGISTRATION
-            if int(
-                competition["numberOfPlaces"]
-            ) >= places_required and 0 <= places_required <= number_of_places_allowed(
-                club, PRICE_OF_A_REGISTRATION
+            if (
+                0
+                <= places_required
+                <= number_of_places_allowed(club, competition, PRICE_OF_A_REGISTRATION)
             ):
                 competition["numberOfPlaces"] = (
                     int(competition["numberOfPlaces"]) - places_required
@@ -79,12 +77,8 @@ def create_app(config):
                 return render_template(
                     "welcome.html", club=club, competitions=competitions
                 )
-            flash("Something went wrong-please try again")
-            return render_template("welcome.html", club=club, competitions=competitions)
-
-        else:
-            flash("Something went wrong-please try again")
-            return render_template("welcome.html", club=club, competitions=competitions)
+        flash("Something went wrong-please try again")
+        return render_template("welcome.html", club=club, competitions=competitions)
 
     @app.route("/clubsArray")
     def clubs_array():
