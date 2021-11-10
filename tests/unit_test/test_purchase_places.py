@@ -122,7 +122,7 @@ def test_the_page_returns_an_error_if_the_club_try_to_book_less_than_0_places(
 ):
     club = clubs[0]
     number_of_points_before_booking = int(club["points"])
-    competition = competitions[3]
+    competition = competitions[1]
     number_of_places_before_booking = int(competition["numberOfPlaces"])
     response = client.post(
         "/purchasePlaces",

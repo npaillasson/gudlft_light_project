@@ -61,9 +61,10 @@ class TestClass:
     ):
         response = client.post("/showSummary", data=dict(email="test@testclub1.co"))
         response = response.data.decode()
-        numbers_of_clubs_in_base = 2
-        numbers_of_li_in_array = response.count("<li class='competition'>")
-        assert numbers_of_li_in_array == numbers_of_clubs_in_base
+        print(response)
+        numbers_of_competition = 3
+        numbers_of_li_in_array = response.count('<li class="competition">')
+        assert numbers_of_li_in_array == numbers_of_competition
 
     def test_the_page_displays_the_right_competitions(self, client, competitions):
         response = client.post("/showSummary", data=dict(email="test@testclub1.co"))
@@ -72,10 +73,10 @@ class TestClass:
             competition_timestamp = time.mktime(
                 time.strptime(competition["date"], "%Y-%m-%d %H:%M:%S")
             )
-            if competition_timestamp < time.time():
-                assert response.find(competition["name"]) == -1
-            else:
+            if competition_timestamp > time.time():
                 assert response.find(competition["name"]) != -1
+            else:
+                assert response.find(competition["name"]) == -1
 
     def test_the_booking_buttons_appears_only_if_the_competition_is_not_sold_out(
         self, client, competitions, clubs
