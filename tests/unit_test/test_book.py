@@ -57,19 +57,3 @@ class TestBooKPage:
         )
         response = response.data.decode()
         assert response.find("Something went wrong-please try again") != -1
-
-    def test_its_impossible_to_book_if_the_number_of_places_requested_exceeds_the_number_of_places_available(
-        self,
-        client,
-        competitions,
-    ):
-        """
-        GIVEN a Flask application configured for testing
-        WHEN the '/book/<invalid_competition>/<club>' page is requested (GET) with an invalid competition name
-        THEN check that the response is valid
-        """
-        response = client.get(
-            "/book/Test sold out competition/Test Club with enough points to take more than 12 places"
-        )
-        response = response.data.decode()
-        assert response.find("Something went wrong-please try again") != -1

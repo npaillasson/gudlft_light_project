@@ -29,12 +29,7 @@ def test_impossible_to_reserve_more_places_than_available_in_the_competition(
         data=dict(club=club["name"], competition=competition["name"], places=12),
     )
     response = response.data.decode()
-    assert (
-        response.find(
-            "Error! Impossible to reserve more places than available in the competition"
-        )
-        != -1
-    )
+    assert response.find("Something went wrong-please try again") != -1
     assert int(club["points"]) == number_of_points_before_booking
     assert int(competition["numberOfPlaces"]) == number_of_places_before_booking
 
@@ -52,10 +47,7 @@ def test_impossible_to_buy_more_places_than_the_club_balance_allows(
         data=dict(club=club["name"], competition=competition["name"], places=12),
     )
     response = response.data.decode()
-    assert (
-        response.find("Oops! you don't have enough points to make this reservation...")
-        != -1
-    )
+    assert response.find("Something went wrong-please try again") != -1
     assert int(club["points"]) == number_of_points_before_booking
     assert int(competition["numberOfPlaces"]) == number_of_places_before_booking
 
@@ -71,12 +63,7 @@ def test_impossible_to_buy_more_than_12_places_at_once(client, clubs, competitio
         data=dict(club=club["name"], competition=competition["name"], places=13),
     )
     response = response.data.decode()
-    assert (
-        response.find(
-            "Oops! It is impossible to reserve more than 12 places at a time."
-        )
-        != -1
-    )
+    assert response.find("Something went wrong-please try again") != -1
     assert int(club["points"]) == number_of_points_before_booking
     assert int(competition["numberOfPlaces"]) == number_of_places_before_booking
 

@@ -55,13 +55,21 @@ def create_app(config):
         if competition and club:
             places_required = int(request.form["places"])
             cost_in_points = places_required * PRICE_OF_A_REGISTRATION
-            if int(competition["numberOfPlaces"]) >= places_required:
+            if (
+                int(competition["numberOfPlaces"]) >= places_required
+                and 0 <= places_required <= 12
+            ):
                 competition["numberOfPlaces"] = (
                     int(competition["numberOfPlaces"]) - places_required
                 )
                 club["points"] = str(int(club["points"]) - cost_in_points)
                 flash("Great-booking complete!")
+                return render_template(
+                    "welcome.html", club=club, competitions=competitions
+                )
+            flash("Something went wrong-please try again")
             return render_template("welcome.html", club=club, competitions=competitions)
+
         else:
             flash("Something went wrong-please try again")
             return render_template("welcome.html", club=club, competitions=competitions)
