@@ -1,4 +1,4 @@
-def test_home_page_return_code_200(client):
+def test_home_page_returns_code_200(client):
     """
     GIVEN a Flask application configured for testing
     WHEN the '/' page is requested (GET)
@@ -8,7 +8,7 @@ def test_home_page_return_code_200(client):
     assert response.status_code == 200
 
 
-def test_home_page_return_the_right_template(client):
+def test_home_page_returns_the_right_template(client):
     """
     GIVEN a Flask application configured for testing
     WHEN the '/' page is requested (GET)

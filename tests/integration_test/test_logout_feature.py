@@ -1,7 +1,7 @@
 from flask import url_for
 
 
-def test_it_is_possible_to_access_to_points_array_from_welcome_page(client, clubs):
+def test_logout_from_welcome_page(client, clubs):
     logout_url = url_for("logout")
     club = clubs[0]
     response = client.post("/showSummary", data=dict(email=club["email"]))

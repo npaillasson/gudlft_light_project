@@ -1,5 +1,5 @@
 class TestBooKPage:
-    def test_book_page_return_code_200_with_valid_club_and_competition(
+    def test_book_page_returns_code_200_with_valid_club_and_competition(
         self,
         client,
     ):
@@ -14,7 +14,7 @@ class TestBooKPage:
         )
         assert response.status_code == 200
 
-    def test_book_page_return_welcome_template_if_club_is_not_valid(self, client):
+    def test_book_page_returns_welcome_template_if_club_is_not_valid(self, client):
         """
         GIVEN a Flask application configured for testing
         WHEN the '/book/<competition>/<invalid_club>' page is requested (GET) with an invalid club name
@@ -27,7 +27,7 @@ class TestBooKPage:
         response = response.data.decode()
         assert response.find("Something went wrong-please try again") != -1
 
-    def test_book_page_return_welcome_template_if_competition_is_not_valid(
+    def test_book_page_returns_welcome_template_if_competition_is_not_valid(
         self, client
     ):
         """

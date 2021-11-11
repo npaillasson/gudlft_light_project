@@ -104,7 +104,7 @@ def test_the_page_returns_an_error_if_the_competition_is_outdated(
     assert int(competition["numberOfPlaces"]) == number_of_places_before_booking
 
 
-def test_the_page_returns_an_error_if_the_club_try_to_book_less_than_0_places(
+def test_the_page_returns_an_error_if_the_club_tries_to_book_less_than_0_place(
     client, clubs, competitions
 ):
     club = clubs[0]
