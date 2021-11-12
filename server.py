@@ -3,7 +3,7 @@ from utilities.get_user import load_competitions, load_clubs
 from utilities.search_competion_and_club import (
     get_club,
     get_competition,
-    get_not_outdated_competition,
+    get_not_outdated_competitions,
 )
 from utilities.number_of_places_allowed import number_of_places_allowed
 
@@ -32,15 +32,13 @@ def create_app(config):
         return render_template(
             "welcome.html",
             club=club,
-            competitions=get_not_outdated_competition(competitions),
+            competitions=get_not_outdated_competitions(competitions),
         )
 
     @app.route("/book/<competition>/<club>")
     def book(competition, club):
         found_club = get_club(clubs, club)
-        found_competition = get_competition(
-            competitions, competition, outdated_permitted=False
-        )
+        found_competition = get_competition(competitions, competition, sold_out=False)
         if found_club and found_competition:
 
             return render_template(
@@ -62,7 +60,7 @@ def create_app(config):
     @app.route("/purchasePlaces", methods=["POST"])
     def purchase_places():
         competition = get_competition(
-            competitions, request.form["competition"], outdated_permitted=False
+            competitions, request.form["competition"], sold_out=False
         )
         club = get_club(clubs, request.form["club"])
         if competition and club:

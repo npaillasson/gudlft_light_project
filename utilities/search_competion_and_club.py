@@ -1,8 +1,8 @@
 import time
 
 
-def get_competition(competitions, competition_name, outdated_permitted=True):
-    if outdated_permitted:
+def get_competition(competitions, competition_name, sold_out=True):
+    if sold_out:
         return [
             competition
             for competition in competitions
@@ -16,12 +16,13 @@ def get_competition(competitions, competition_name, outdated_permitted=True):
                 if competition["name"] == competition_name
                 and time.mktime(time.strptime(competition["date"], "%Y-%m-%d %H:%M:%S"))
                 > time.time()
+                and int(competition["numberOfPlaces"]) > 0
             ][0]
         except IndexError:
             return None
 
 
-def get_not_outdated_competition(competitions):
+def get_not_outdated_competitions(competitions):
     try:
         return [
             competition
