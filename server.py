@@ -54,7 +54,7 @@ def create_app(config):
             return render_template(
                 "welcome.html",
                 club=club,
-                competitions=competitions,
+                competitions=get_not_outdated_competitions(competitions),
             )
 
     @app.route("/purchasePlaces", methods=["POST"])
@@ -75,7 +75,9 @@ def create_app(config):
                 club["points"] = str(int(club["points"]) - cost_in_points)
                 flash("Great-booking complete!")
                 return render_template(
-                    "welcome.html", club=club, competitions=competitions
+                    "welcome.html",
+                    club=club,
+                    competitions=get_not_outdated_competitions(competitions),
                 )
         flash("Something went wrong-please try again")
         return render_template("welcome.html", club=club, competitions=competitions)
@@ -83,7 +85,9 @@ def create_app(config):
     @app.route("/clubsArray")
     def clubs_array():
         return render_template(
-            "clubs_array.html", clubs=clubs, competitions=competitions
+            "clubs_array.html",
+            clubs=clubs,
+            competitions=get_not_outdated_competitions(competitions),
         )
 
     @app.route("/logout")
