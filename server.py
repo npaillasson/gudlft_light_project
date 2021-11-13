@@ -38,7 +38,7 @@ def create_app(config):
     @app.route("/book/<competition>/<club>")
     def book(competition, club):
         found_club = get_club(clubs, club)
-        found_competition = get_competition(competitions, competition, sold_out=False)
+        found_competition = get_competition(competitions, competition)
         if found_club and found_competition:
 
             return render_template(
@@ -59,9 +59,7 @@ def create_app(config):
 
     @app.route("/purchasePlaces", methods=["POST"])
     def purchase_places():
-        competition = get_competition(
-            competitions, request.form["competition"], sold_out=False
-        )
+        competition = get_competition(competitions, request.form["competition"])
         club = get_club(clubs, request.form["club"])
         if competition and club:
             places_required = int(request.form["places"])
