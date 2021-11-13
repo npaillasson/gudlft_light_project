@@ -7,7 +7,7 @@ from utilities.search_competion_and_club import (
 )
 from utilities.number_of_places_allowed import number_of_places_allowed
 
-PRICE_OF_A_REGISTRATION = 1
+PRICE_OF_A_REGISTRATION = 3
 
 
 def create_app(config):
