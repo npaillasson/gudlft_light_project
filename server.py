@@ -73,7 +73,9 @@ def create_app(config):
                     int(competition["numberOfPlaces"]) - places_required
                 )
                 club["points"] = str(int(club["points"]) - cost_in_points)
-                flash("Great-booking complete!")
+                flash(
+                    f"Great-booking complete! You have bought {places_required} place(s) for {cost_in_points} point(s)"
+                )
                 return render_template(
                     "welcome.html",
                     club=club,
