@@ -3,11 +3,6 @@ class TestBooKPage:
         self,
         client,
     ):
-        """
-        GIVEN a Flask application configured for testing
-        WHEN the '/book/<competition>/<club>' page is requested (GET) with a valid competition and a valid club name
-        THEN check that the response is valid
-        """
 
         response = client.get(
             "/book/Test competition Festival/Test Club with enough points to take more than 12 places"
@@ -15,11 +10,7 @@ class TestBooKPage:
         assert response.status_code == 200
 
     def test_book_page_returns_welcome_template_if_club_is_not_valid(self, client):
-        """
-        GIVEN a Flask application configured for testing
-        WHEN the '/book/<competition>/<invalid_club>' page is requested (GET) with an invalid club name
-        THEN check that the response is valid
-        """
+
         response = client.get(
             "/book/Test competition Festival/This Club doesnt exists",
             follow_redirects=True,
@@ -30,11 +21,7 @@ class TestBooKPage:
     def test_book_page_returns_welcome_template_if_competition_is_not_valid(
         self, client
     ):
-        """
-        GIVEN a Flask application configured for testing
-        WHEN the '/book/<invalid_competition>/<club>' page is requested (GET) with an invalid competition name
-        THEN check that the response is valid
-        """
+
         response = client.get(
             "/book/invalid competition/Test Club with enough points to take more than 12 places",
             follow_redirects=True,
