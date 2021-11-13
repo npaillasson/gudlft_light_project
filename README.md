@@ -109,8 +109,6 @@ Puis rendez-vous sur l'interface de [tests](http://0.0.0.0:8089), selectionnez l
 
 ## Informations Generales
 
-Ce projet utilise le framework [flask](https://flask.palletsprojects.com/en/2.0.x/)  for the realization of the tests, the project uses the python test framework [pytest](https://docs.pytest.org/en/6.2.x/). Pour la réalisation des tests de performance, le projet utilise [locust](https://locust.io/).
-
 This project is entirely coded in python 3.
 
 It is realized within the framework of a training on the site [OpenClassrooms](https://openclassrooms.com/fr/).
