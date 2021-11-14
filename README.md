@@ -107,8 +107,6 @@ Puis rendez-vous sur l'interface de [tests](http://0.0.0.0:8089), selectionnez l
 ***
 
 
-## Informations Generales
-
 This project is entirely coded in python 3.
 
 It is realized within the framework of a training on the site [OpenClassrooms](https://openclassrooms.com/fr/).
@@ -204,7 +202,7 @@ To launch a performance test with locust, start the server, then:
 $ locust -f tests/performance_tests/locustfile.py
 ```
 
-Then go to the [tests interface](http://0.0.0.0:8089), select the number of users to simulate, and enter the server address (http://127.0.0.1:5000/) then click on "strat swarming" to launch the tests. 
+Then go to the [tests interface](http://0.0.0.0:8089), select the number of users to simulate, and enter the server address (http://127.0.0.1:5000/) then click on "strat swarming" to launch tests. 
 
 
 ****
