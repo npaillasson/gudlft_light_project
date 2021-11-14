@@ -19,7 +19,7 @@ Ce projet est une interface web qui permet à des secretaire de clubs sportifs d
 
 ## Informations Generales
 
-Ce projet utilise le framework de developpement web[flask](https://flask.palletsprojects.com/en/2.0.x/). Pour la réalisation des tests, le projet utilise le framework de test python [pytest](https://docs.pytest.org/en/6.2.x/). Pour la réalisation des tests de performance, le projet utilise [locust](https://locust.io/).
+Ce projet utilise le framework de developpement web [flask](https://flask.palletsprojects.com/en/2.0.x/). Pour la réalisation des tests, le projet utilise le framework de test python [pytest](https://docs.pytest.org/en/6.2.x/). Pour la réalisation des tests de performance, le projet utilise [locust](https://locust.io/).
 
 
 ## Installation Usage
