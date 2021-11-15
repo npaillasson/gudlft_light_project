@@ -59,7 +59,7 @@ export FLASK_APP=server.py
 
 sous Windows:
 ```
-$set FLASK_APP = server.py
+$set FLASK_APP=server.py
 ```
 
 Pour lancer le serveur exécuter la commande suivante :
@@ -161,7 +161,7 @@ export FLASK_APP=server.py
 
 On Windows:
 ```
-$set FLASK_APP = server.py
+$set FLASK_APP=server.py
 ```
 
 To start the server run the following command :
